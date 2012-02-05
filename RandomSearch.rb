@@ -26,3 +26,5 @@ $activity.start_ruboto_activity "$sample_activity" do
   
 @Ejecutar = proc do |view|
 	@text_view.text = 'Aqui debería salir el resultado'
+end
+end

@@ -31,7 +31,8 @@ $activity.start_ruboto_activity "$sample_activity" do
 	search_space = Array.new(problem_size) {|i| [-5, +5]}
 	max_iter=100
 	best = search(search_space, max_iter)
-	@text_view.text = "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
+	iter = 0
+	@text_view.text = "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect} founded in iteration #{iter}"
 end
 
 
@@ -52,7 +53,8 @@ def search(search_space, max_iter)
 	  candidate[:vector] = random_vector(search_space)
 	  candidate[:cost] = objective_function(candidate[:vector])
 	  best = candidate if best.nil? or candidate[:cost] < best[:cost]
-	  puts " > iteration=#{(iter+1)}, best=#{best[:cost]}"
+	  iter = #{(iter+1)}
+	  #puts " > iteration=#{(iter+1)}, best=#{best[:cost]}"
 	end
   return best
 end

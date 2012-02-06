@@ -31,7 +31,7 @@ $activity.start_ruboto_activity "$sample_activity" do
 	search_space = Array.new(problem_size) {|i| [-5, +5]}
 	max_iter=100
 	best = search(search_space, max_iter)
-	puts "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
+	@text_view.text = "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
 end
 
 
@@ -61,7 +61,7 @@ end
   # problem configuration
  # problem_size = 2
   #search_space = Array.new(problem_size) {|i| [-5, +5]}
-  Chapter 2. Stochastic Algorithms
+  #Chapter 2. Stochastic Algorithms
   # algorithm configuration
   # max_iter = 100
   # execute the algorithm

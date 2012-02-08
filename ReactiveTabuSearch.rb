@@ -5,7 +5,7 @@ require 'ruboto/util/toast'
 ruboto_import_widgets :Button, :LinearLayout, :TextView
 
 $activity.start_ruboto_activity "$sample_activity" do
-  setTitle 'Adaptative Random Search'
+  setTitle 'Reactive Tabu Search'
 
   
   
@@ -187,7 +187,7 @@ def search(cities, max_cand, max_iter, increase, decrease)
 		end
 		best_move_edges.each {|edge| make_tabu(tabu_list, edge, iter)}
 		best = candidates.first[0] if candidates.first[0][:cost] < best[:cost]
-		puts " > it=#{iter}, tenure=#{prohib_period.round}, best=#{best[:cost]}"
+		@text_view = " > it=#{iter}, tenure=#{prohib_period.round}, best=#{best[:cost]}"
 	end
 	return best
 end

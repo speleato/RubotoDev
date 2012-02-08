@@ -31,7 +31,7 @@ $activity.start_ruboto_activity "$sample_activity" do
 	search_space = Array.new(problem_size) {|i| [-5, +5]}
 	max_iter=100
 	best = search(search_space, max_iter)
-	@text_view.text = "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect} founded in iteration #{iter}"
+	@text_view.text = "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
 end
 
 

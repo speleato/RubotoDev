@@ -5,7 +5,7 @@ require 'ruboto/util/toast'
 ruboto_import_widgets :Button, :LinearLayout, :TextView
 
 $activity.start_ruboto_activity "$sample_activity" do
-  setTitle 'Adaptative Random Search'
+  setTitle 'Scatter search'
 
   
   
@@ -23,7 +23,22 @@ end
   
   
 @ManualBusqueda = proc do |view|
-	@text_view.text = 'Prueba a ver si sale el texto'
+	@text_view.text = 'Este algoritmo se basa en mantener una serie de soluciones de alta calidad (proximas al óptimo) para conseguir información del optimo global a partir de los óptimos locales.
+	La estrategia consiste en, una vez obtenidos una serie de óptimos locales, recombinar la información que estos ofrecen para obtener centroides. Mas tarde, se computará un heuristico para estos centroides
+	y se obtendrá una serie de soluciones que, en caso de mejorar alguna de las que ya tenemos, sustituirá a las actuales. una vez finalizado este proceso, volvemos a recalcular los centroides. 
+	Parametros del algoritmo ejemplo: 
+	-->Tamaño del problema: 3
+	-->Espacio de búsqueda:[-5, +5]}
+	-->Máximo número de iteraciones: 100
+	-->Tamaño de salto: (bounds[0][1]-bounds[0][0])*0.005
+	-->Maximo número de mejoras: 30
+	-->Tamaño del set de soluciones de referencia: 10
+	-->Tamaño del set de soluciones obtenidas: 20
+	-->no_elite: 5
+	Recomendaciones
+	1/Este algoritmo es adecuado tanto para entornos discretos como para optimización combinatoria 
+	2/Se recomienda mantener el número de soluciones óptimas bajo
+	3/Los centroides pueden ser formados por 2, 3, o 4 soluciones como máximo.'
 end
 
 @Ejecutar = proc do |view|

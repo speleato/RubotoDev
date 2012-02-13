@@ -24,7 +24,22 @@ $activity.start_ruboto_activity "$sample_activity" do
   
   
   @ManualBusqueda = proc do |view|
-      @text_view.text = 'Prueba a ver si sale el texto'
+      @text_view.text = 'Algoritmo perteneciente a la familia de algoritmos de búsqueda estocásticos, consistentes en búsquedas directas de elementos.
+						 El algoritmo de adaptación de búsqueda aleatorio fue diseñado para hacer frente a las limitaciones
+						 del tamaño de paso fijo en el algoritmo de búsqueda aleatoria localizada. La clave de este algoritmo consiste en establecer el tamaño de salto
+						 correcto para escapar de los óptimos locales. En cada iteracion tomará un salto de mayor tamaño y si el resultado de este salto ofrece una mejor
+						 solución que el óptimo local tomará esa ruta. En caso de no encontrar un óptimo mejor, los saltos se irán acortando.
+						 Parametros del algoritmo ejemplo:
+						 -->tamaño del problema: 2
+						 -->espacio de búsqueda: [-5,5]
+						 -->maximo numero de iteraciones: 1000
+						 -->Tamaño de salto pequeño inicial: 3
+						 -->Tamaño de salto grande inicial: 10
+						 -->valor de inicio:0.05
+						 Recomendaciones
+						 1/ En caso de empate entre dos soluciones candidatas, se tomará como mejora la nueva solución frente a la antigua
+						 2/ El algoritmo puede adaptarse para buscar soluciones solo en una direccion (ej: solo hacia valores mayores que el actual)'
+	  
   end
   
 @Ejecutar = proc do |view|
@@ -35,6 +50,7 @@ $activity.start_ruboto_activity "$sample_activity" do
 	l_factor = 3.0
 	iter_mult = 10
 	max_no_impr = 30
+	init_factor = 0.05
 	best = search(max_iter, bounds, init_factor, s_factor, l_factor,iter_mult, max_no_impr)
 	@text_view.text = "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
 end
@@ -92,11 +108,12 @@ def search(max_iter, bounds, init_factor, s_factor, l_factor, iter_mult,max_no_i
 		current = step
 		end
 		count = 0
+		puts " > iteration #{(iter+1)}, best=#{current[:cost]}"
 	else
 		count += 1
 		count, stepSize = 0, (step_size/s_factor) if count >= max_no_impr
 	end
-	puts " > iteration #{(iter+1)}, best=#{current[:cost]}"
+	
 	end
 	return current
 end

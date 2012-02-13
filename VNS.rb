@@ -5,7 +5,7 @@ require 'ruboto/util/toast'
 ruboto_import_widgets :Button, :LinearLayout, :TextView
 
 $activity.start_ruboto_activity "$sample_activity" do
-  setTitle 'Adaptative Random Search'
+  setTitle 'VSN'
 
   
   
@@ -23,7 +23,21 @@ $activity.start_ruboto_activity "$sample_activity" do
   
   
 @ManualBusqueda = proc do |view|
-	@text_view.text = 'Prueba a ver si sale el texto'
+	@text_view.text = 'El VNS sigue un principio de búsqueda simple: empieza con un entorno de búsqueda pequeño y cuando ha enocontrado un óptimo local va ampliando y ampliando ese entorno hasta encontrar una mejora. Una vez
+	encontrada esta mejora, el proceso se repite empezando de este punto. Hay tres puntos fundamentales: 
+	A/ los minimos locales se establecen para cada sistema de vecinos
+	B/ Un minimo global es un mínimo local válido para todas las estructuras de vecinos existentes
+	C/ Suele darse que el mínimo local de cada sistema de vecinos es muy similar al mínimo global.
+	Parametros del algoritmo ejemplo: 
+	  -->datos_iniciales: [[565,575],[25,185],[345,750],[945,685],[845,655],[880,660],[25,230],[525,1000],[580,1175],[650,1130],[1605,620],[1220,580],[1465,200],[1530,5],[845,680],[725,370],[145,665],[415,635],[510,875],[560,365],[300,465],[520,585],[480,415],[835,625],[975,580],[1215,245],[1320,315],[1250,400],[660,180],[410,250],[420,555],[575,665],[1150,1160],[700,580],[685,595],[685,610],[770,610],[795,645],[720,635],[760,650],[475,960],[95,260],[875,920],[700,500],[555,815],[830,485],[1170,65],[830,610],[605,625],[595,360],[1340,725],[1740,245]]
+	  -->Máximo número de iteraciones:150
+	  -->Máximo número de mejoras:50
+	  -->Vecinos: 1..20
+	  -->local_search_optima = 12000.0
+	  -->Función de valoración = Multiplicador * (local_search_optima/datos_iniciales.size.to_f)
+	  Recomendaciones
+	  1/ Se recomienda usar algoritmos de aproximación para reducir el tiempo de ejecución.
+	  2/ El heuristico utilizado para la búsqueda local debe ser específico para cada tipo de problema'
 end
 
 @Ejecutar = proc do |view|

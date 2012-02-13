@@ -5,7 +5,7 @@ require 'ruboto/util/toast'
 ruboto_import_widgets :Button, :LinearLayout, :TextView
 
 $activity.start_ruboto_activity "$sample_activity" do
-  setTitle 'Reactive Tabu Search'
+  setTitle 'Reactive tabu search'
 
   
   
@@ -23,7 +23,17 @@ $activity.start_ruboto_activity "$sample_activity" do
   
   
 @ManualBusqueda = proc do |view|
-	@text_view.text = 'Prueba a ver si sale el texto'
+	@text_view.text = 'Este algoritmo es una variación de la búsqueda tabu. La principal diferencia con este método consiste en que se implementan mejoras de aprendizaje máquina para optimizar las técnicas de búsqueda al problema en cuestión. 
+	Parametros del algoritmo ejemplo:
+	-->Datos de entrada: [[565,575],[25,185],[345,750],[945,685],[845,655],[880,660],[25,230],[525,1000],[580,1175],[650,1130],[1605,620],[1220,580],[1465,200],[1530,5],[845,680],[725,370],[145,665],[415,635],[510,875],[560,365],[300,465],[520,585],[480,415],[835,625],[975,580],[1215,245],[1320,315],[1250,400],[660,180],[410,250],[420,555],[575,665],[1150,1160],[700,580],[685,595],[685,610],[770,610],[795,645],[720,635],[760,650],[475,960],[95,260],[875,920],[700,500],[555,815],[830,485],[1170,65],[830,610],[605,625],[595,360],[1340,725],[1740,245]]
+	-->Máximo número de iteraciones: 100
+	-->Máximo número de candidatos: 50
+	-->Incremento: 0.3
+	-->Disminución: 0.9
+	Recomendaciones:
+	1/Este algoritmo se diseñó para ser usado con un heuristico embebido de tipo Hill-climbing, aunque puede ser utilizado con otro tipo de heuristicos.
+	2/La busqueda tabú está diseñada para aplicarse a dominios discretos.
+	3/Como mejora se pueden implementar listas específicas para la búsqueda en áreas prometedoras.'
 end
 
 @Ejecutar = proc do |view|
@@ -187,7 +197,7 @@ def search(cities, max_cand, max_iter, increase, decrease)
 		end
 		best_move_edges.each {|edge| make_tabu(tabu_list, edge, iter)}
 		best = candidates.first[0] if candidates.first[0][:cost] < best[:cost]
-		@text_view = " > it=#{iter}, tenure=#{prohib_period.round}, best=#{best[:cost]}"
+		@text_view.text = " > it=#{iter}, tenure=#{prohib_period.round}, best=#{best[:cost]}"
 	end
 	return best
 end

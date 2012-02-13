@@ -5,7 +5,7 @@ require 'ruboto/util/toast'
 ruboto_import_widgets :Button, :LinearLayout, :TextView
 
 $activity.start_ruboto_activity "$sample_activity" do
-  setTitle 'Adaptative Random Search'
+  setTitle 'ILS'
 
   
   
@@ -23,7 +23,16 @@ $activity.start_ruboto_activity "$sample_activity" do
   
   
 @ManualBusqueda = proc do |view|
-      @text_view.text = 'Prueba a ver si sale el texto'
+      @text_view.text = 'El algoritmo ILS consiste en samplear una serie de soluciones vecinas a la solución inicial obtenida y aplicar algoritmos de búsqueda local a las soluciones candidatas usando un heurístico embebido.
+						 Parametros del algoritmo ejemplo:
+						-->datos iniciales:[[565,575],[25,185],[345,750],[945,685],[845,655],[880,660],[25,230],[525,1000],[580,1175],[650,1130],[1605,620],[1220,580],[1465,200],[1530,5],[845,680],[725,370],[145,665],[415,635],[510,875],[560,365],[300,465],[520,585],[480,415],[835,625],[975,580],[1215,245],[1320,315],[1250,400],[660,180],[410,250],[420,555],[575,665],[1150,1160],[700,580],[685,595],[685,610],[770,610],[795,645],[720,635],[760,650],[475,960],[95,260],[875,920],[700,500],[555,815],[830,485],[1170,65],[830,610],[605,625],[595,360],[1340,725],[1740,245]]
+						-->maximo número de iteraciones: 100
+						-->maximo número de mejoras: 50
+						-->numero de bits: 64
+						 Recomendaciones
+						 1/ Algoritmo adecuado para problemas con dominios discretos
+						 2/ Las soluciones propuestas deberán estar lo suficientemente alejadas unas de otras para que sus busquedas no interfieran entre si
+						 3/ Se recomienda definir un heuristico embebido que sea específico para el problema afrontado.'
 end
 
 @Ejecutar = proc do |view|
@@ -31,7 +40,6 @@ end
 	max_iterations = 100
 	max_no_improv = 50
 	num_bits = 64
-	max_iterations = 1000
 	best = search(berlin52, max_iterations, max_no_improv)
 	@text_view.text = "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
 end
@@ -113,6 +121,7 @@ def search(cities, max_iterations, max_no_improv)
 end
 
 end
+
 
 
 

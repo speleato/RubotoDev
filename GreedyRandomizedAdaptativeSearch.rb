@@ -5,7 +5,7 @@ require 'ruboto/util/toast'
 ruboto_import_widgets :Button, :LinearLayout, :TextView
 
 $activity.start_ruboto_activity "$sample_activity" do
-  setTitle 'Adaptative Random Search'
+  setTitle 'Greedy Randomized adaptative search'
 
   
   
@@ -23,7 +23,17 @@ $activity.start_ruboto_activity "$sample_activity" do
   
   
 @ManualBusqueda = proc do |view|
-	@text_view.text = 'Prueba a ver si sale el texto'
+	@text_view.text = 'Este algoritmo consiste en el constante sampleo de soluciones procesadas mediante un algoritmo voraz para luego optimizarlas con una búsqueda local.
+					   La estrategia del procedimiento se centra en el mecanismo de construcción estocástica y voraz paso a paso
+					   que limita la selección y el orden de inclusión de los componentes de una solución basada en el valor que se espera que proporcione.
+						 Parametros del algoritmo ejemplo: 
+						 -->datos_iniciales: [[565,575],[25,185],[345,750],[945,685],[845,655],[880,660],[25,230],[525,1000],[580,1175],[650,1130],[1605,620],[1220,580],[1465,200],[1530,5],[845,680],[725,370],[145,665],[415,635],[510,875],[560,365],[300,465],[520,585],[480,415],[835,625],[975,580],[1215,245],[1320,315],[1250,400],[660,180],[410,250],[420,555],[575,665],[1150,1160],[700,580],[685,595],[685,610],[770,610],[795,645],[720,635],[760,650],[475,960],[95,260],[875,920],[700,500],[555,815],[830,485],[1170,65],[830,610],[605,625],[595,360],[1340,725],[1740,245]]
+						 -->Máximo número de iteraciones:50
+						 -->Máximo número de mejoras:50
+						 -->Factor de voracidad: 0.3
+						 Recomendaciones:
+						 1/ Ofrece soluciones aproximadas a la solución óptima en tiempos limitados siempre que se ejecute en entornos acotados pequeños. En entornos grandes su rendimiento tiende a descender
+						 2/ El factor de voracidad define el mecanismo de construcción de la solucion. Un factor muy cercano a 0 resultará demasiado ambicioso mientras que uno cercano a 1 será demasiado generalizado.'
 end
 
 @Ejecutar = proc do |view|
@@ -41,7 +51,7 @@ def euc_2d(c1, c2)
 end
 
 def cost(perm, cities)
-	distance =0
+	distance = 0
 	perm.each_with_index do |c1, i|
 	c2 = (i==perm.size-1) ? perm[0] : perm[i+1]
 	distance += euc_2d(cities[c1], cities[c2])
@@ -83,11 +93,12 @@ def construct_randomized_greedy_solution(cities, alpha)
 		end
 		rcl, max, min = [], costs.max, costs.min
 		costs.each_with_index do |c,i|
+		rcl << candidates[i] if c <= (min + alpha*(max-min))
 		end
 		candidate[:vector] << rcl[rand(rcl.size)]
-	end
-	candidate[:cost] = cost(candidate[:vector], cities)
-	return candidate
+		end
+		candidate[:cost] = cost(candidate[:vector], cities)
+		return candidate
 end
 
 def search(cities, max_iter, max_no_improv, alpha)
